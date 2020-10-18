@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Guess
+        </title>
+        <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+        <link rel="stylesheet" href="Guess the word.css">
+
+
+        <script
+  src="https://code.jquery.com/jquery-3.5.1.js"
+  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
+    </head>
+<body>
+
+<div id="outer">
+   <h1><marquee>It's all about guessing my friend...!!!</marquee>
+    </h1>
+    <div id="outerinbox">
+    <input type="text" id="oib" placeholder="guess the word...!!!!">
+   </div>
+    <div id="inner">
+         <div id="in">
+             <input type="text" placeholder="Enter the correct word here..." id="innerinbox" style="height: 4vh; margin-top: 10px; width: 250px;">
+         </div><br>
+
+         <div id="btns">
+         <button class="btn btn-danger" onclick="startt()">Start</button>
+         <button class="btn btn-success" onclick="mainn()">Check</button>
+         <button class="btn btn-primary" onclick="nextt()">Next</button>
+         <br><br>
+        </div>
+     
+    </div>
+    
+    
+
+    <br><br><br><br><br><br><br>
+    <p>Chances left:<span id="chan">3</span></p>
+    <div id="dis">
+        <p>Instructions:
+            <br><br>
+            1.You will only get 3 chances for one word.<br>
+            2.Start the game by smashing start button.<br>
+            3.Do not refresh the page while playing.<br>
+            4.Once you skip a question you can't go back.
+        </p>
+    </div>
+</div>
+
+
+
+
+    <script type="text/javascript">
+
+    window.onload=alert("Enter the start button to start the game");
+
+var arr=["guess","literally","irregardless","lieutenant","enormity"];
+var inpro=["-u--s","l-t-ra-ly","-r-eg-r-l-ss","L-e-te-a-t","-no-m-ty"];
+  var myscore=0;
+
+var outerinputbox=document.getElementById("oib");
+var innerinputbox=document.getElementById("innerinbox");
+var count=-1;
+var chancesleft=3;
+function startt()
+{
+   if(count!=5)
+   {
+    var outerinputbox=document.getElementById("oib");
+    outerinputbox.value=inpro[0];
+    count++;
+   }
+   else{
+       alert("Refresh the page to play again.")
+   }
+}
+
+
+function mainn()
+{
+    if(chancesleft>0)
+    {
+        chancesleft--;
+      var innerinputbox=document.getElementById("innerinbox").value;
+      var wor=arr[count];
+    //   var one=[...wor];
+    //   alert(innerinputbox);
+    //   alert(wor);
+      if(innerinputbox==wor)
+      {
+           
+          alert("You guessed it right my friend :)");
+          myscore++;
+          chancesleft++;
+      }
+      else{
+        var lon=document.getElementById("innerinbox").value; 
+        var lonarr=arr[count];
+
+
+          var vedant=[...lon];
+          var vedant2=[...lonarr];
+          if(vedant.length!=vedant2.length)
+          {
+              alert("Length of the word you enterd is not correct (:");
+          }
+        else{
+            var st="";
+            var check=0;
+            for(var i=0;i<arr[count].length;i++)
+            {
+                if(vedant[i]!=vedant2[i])
+                {
+                    check++;
+                }
+            }
+            if(check==1)
+            {
+             alert(`your ${check} letter is wrong. Try again`);
+            }
+            else{
+                alert(`your ${check} letters is wrong. Try again..`);
+            }
+            // alert(st);
+            // document.getElementById("innerinbox").value=st;
+        }
+
+        //   alert("oopsss..!! your answer is wrong.. try again");
+      }
+    
+      document.getElementById("chan").innerText=chancesleft;
+      
+    }
+    else{
+        document.getElementById("chan").innerText=chancesleft;
+        alert(":( your chances are over....")
+    }
+}
+
+function nextt()
+{
+    document.getElementById("innerinbox").value="";
+
+chancesleft=3;
+document.getElementById("chan").innerText=chancesleft;
+    if(count<0)
+    {
+        alert("Start the game first.");
+    }
+    
+    else{
+        count++;
+   if(count<inpro.length)
+   {
+    
+    var outerinputbox=document.getElementById("oib");
+    outerinputbox.value=inpro[count];
+    
+   }
+   else{
+       alert("quiz is finished.. :)");
+       document.getElementById("btns").innerHTML=`<h1>Thanks for playing. Your score is${myscore}</h1>`;
+   }
+}
+}
+
+
+</script>
+</body>
+</html>
